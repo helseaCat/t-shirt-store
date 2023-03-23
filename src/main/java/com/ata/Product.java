@@ -4,8 +4,8 @@ package main.java.com.ata;
  * Shop class is responsible for storing the full inventory of products.
  * The class also holds a method that prints a formatted list of products
  * using the printProducts method. Another useful method is findProduct
- * which linerally searches the products array for a match. Note that
- * findProduct is case sensitive at this point in production.
+ * which linearly searches the products array for a match. Note that
+ * findProduct is case-sensitive at this point in production.
  */
 public class Product {
 
