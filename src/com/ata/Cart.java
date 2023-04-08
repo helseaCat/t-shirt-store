@@ -29,6 +29,13 @@ class Cart {
     }
 
     public boolean checkout(){
-        return false;
+        if(items.isEmpty()){return false;}
+        System.out.println("Your total is $" + String.format("%.2f",(total+(total*taxRate))));
+        empty();
+        return true;
+    }
+
+    private void empty(){
+        items.clear();
     }
 }

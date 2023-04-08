@@ -67,6 +67,12 @@ public class Menu {
             else if(selection == 4){
                 cart.showDetails();
             }
+            else if(selection == 5){
+                if(cart.checkout()){
+                    System.out.println("Thank you for shopping at " + shop.getName() + ".");
+                }
+                else {System.out.println("Your cart is currently empty. Please add at least one product to check out.");}
+            }
             else {
                 System.out.println("Option " + selection + " was selected. Not yet implemented.");
             }
