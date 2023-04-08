@@ -13,9 +13,6 @@ public class Product {
     private String name;
     private double price;
 
-    public Product(){
-    }
-
     /**
      * Class constructor, which expects a String array.
      * It allows for the owner to pass products as data

@@ -2,6 +2,7 @@ package com.ata;
 
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -22,11 +23,11 @@ public class ShopRunner {
         String[] name = {"Crew Neck" , "V-Neck" , "Polo" , "Boat Neck" , "Tank Top"};
         double[] price = {20.00 , 20.00 , 25.50 , 30.25 , 15.75};
         int[] id = {0 , 1 , 2 , 3 , 4};
-        Product[] products = new Product[name.length];
+        ArrayList<Product> products = new ArrayList<>(name.length);
 
         for(int i = 0; i < name.length; i++){
             Product product = new Product(id[i] , name[i] , price[i]);
-            products[i] = product;
+            products.add(product);
         }
 
         Shop shop = new Shop("T-Shirt Mart", products);

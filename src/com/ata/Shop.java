@@ -1,7 +1,6 @@
 package com.ata;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 /**
  * Shop class is responsible for storing the full inventory of products.
@@ -14,6 +13,7 @@ public class Shop {
 
     private String name;
     private ArrayList<Product> products;
+    private Cart cart;
 
     public Shop(){
     }
@@ -25,10 +25,9 @@ public class Shop {
      * @param name String containing store name.
      * @param products contains data on inventory.
      */
-    public Shop(String name, Product[] products) {
+    public Shop(String name, ArrayList<Product> products) {
         this.name = name;
-        this.products = new ArrayList<>(products.length);
-        Collections.addAll(this.products, products);
+        this.products = products;
     }
 
     public String getName() {
