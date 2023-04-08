@@ -11,7 +11,7 @@ import java.util.Scanner;
  * with respect to its menu.
  */
 public class Menu {
-    private Cart cart;
+    private Cart cart = new Cart();
     private Shop shop;
     private String[] menuOptions = {"Exit" , "List Products" , "Buy Product" ,
             "Find Product" , "Show Cart" , "Checkout"};
@@ -65,7 +65,7 @@ public class Menu {
                 }
             }
             else if(selection == 4){
-
+                cart.showDetails();
             }
             else {
                 System.out.println("Option " + selection + " was selected. Not yet implemented.");

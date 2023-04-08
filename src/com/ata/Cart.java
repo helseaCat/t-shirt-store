@@ -5,7 +5,7 @@ import java.util.ArrayList;
 class Cart {
     private ArrayList<Product> items = new ArrayList<>();
     private double total;
-    private double taxRate;
+    private double taxRate = 0.1;
 
     public void addItem(Product p){
         items.add(p);
@@ -14,6 +14,18 @@ class Cart {
     }
 
     public void showDetails(){
+
+        if(items.isEmpty()){
+            System.out.println("The cart is empty. Please add at least one product to see it in the cart.");
+        }
+        else{
+            System.out.println("--Cart--\nItem Count: " + items.size() + "\nItems:");
+            for(Product product : items){
+                System.out.println(product.getName() + ": $" + String.format("%.2f", product.getPrice()));
+            }
+            System.out.println("\nPre-Tax Total: $" + String.format("%.2f", total));
+            System.out.println("Post-Tax Total ("+ String.format("%.2f",taxRate*100)+"% Tax): $" + String.format("%.2f", (total+(total*taxRate))));
+        }
     }
 
     public boolean checkout(){
