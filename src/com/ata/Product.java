@@ -1,4 +1,4 @@
-package main.java.com.ata;
+package com.ata;
 
 /**
  * Shop class is responsible for storing the full inventory of products.
@@ -9,22 +9,28 @@ package main.java.com.ata;
  */
 public class Product {
 
+    private int id;
     private String name;
     private double price;
 
     public Product(){
-
     }
 
     /**
      * Class constructor, which expects a String array.
      * It allows for the owner to pass products as data
      * to be stored in products array.
-     * @param products contains data on inventory.
+     * @param name contains inventory name.
+     * @param price contains USD price of item.
      */
-    public Product(String name, double price) {
+    public Product(int id, String name, double price) {
+        this.id = id;
         this.name = name;
         this.price = price;
+    }
+
+    public int getID() {
+        return id;
     }
 
     public String getName(){

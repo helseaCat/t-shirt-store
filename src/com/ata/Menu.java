@@ -1,4 +1,4 @@
-package main.java.com.ata;
+package com.ata;
 
 import java.util.Scanner;
 
@@ -15,10 +15,6 @@ public class Menu {
     private String[] menuOptions = {"Exit" , "List Products" , "Buy Product" ,
             "Find Product" , "Show Cart" , "Checkout"};
     private Scanner scanner;
-
-
-
-
 
     /**
      * Class constructor, which expects a Scanner object
@@ -78,7 +74,7 @@ public class Menu {
         System.out.println("Hello. Please enter your name:");
         String name = scanner.nextLine();
 
-        System.out.println("Welcome " + name + " to " + "T-Shirt Mart");
+        System.out.println("Welcome " + name + " to " + shop.getName());
     }
 
     /**

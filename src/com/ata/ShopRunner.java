@@ -1,4 +1,4 @@
-package main.java.com.ata;
+package com.ata;
 
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
@@ -21,28 +21,18 @@ public class ShopRunner {
 
         String[] name = {"Crew Neck" , "V-Neck" , "Polo" , "Boat Neck" , "Tank Top"};
         double[] price = {20.00 , 20.00 , 25.50 , 30.25 , 15.75};
-
-
+        int[] id = {0 , 1 , 2 , 3 , 4};
         Product[] products = new Product[name.length];
-        Product product;
 
         for(int i = 0; i < name.length; i++){
-            product = new Product(name[i] , price[i]);
+            Product product = new Product(id[i] , name[i] , price[i]);
             products[i] = product;
-
-            //System.out.println(products[i].getName() + " - " + products[i].getPrice());
-
         }
 
-
-        //Product thing = new Product("Crew Neck" , 20.00);
-        //products[0] = thing;
-
-        Shop shop = new Shop(name[0], products);
+        Shop shop = new Shop("T-Shirt Mart", products);
         Menu menu = new Menu(new Scanner(new InputStreamReader(System.in, Charset.forName("UTF-8"))) , shop);
 
         menu.greet();
         menu.executeMenu();
     }
 }
-

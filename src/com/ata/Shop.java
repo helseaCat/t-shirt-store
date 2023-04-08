@@ -1,6 +1,7 @@
-package main.java.com.ata;
+package com.ata;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Shop class is responsible for storing the full inventory of products.
@@ -21,13 +22,13 @@ public class Shop {
      * Class constructor, which expects a String array.
      * It allows for the owner to pass products as data
      * to be stored in products array.
+     * @param name String containing store name.
      * @param products contains data on inventory.
      */
     public Shop(String name, Product[] products) {
         this.name = name;
-        for(int i = 0; i < products.length; i++){
-            this.products.add(products[i]);
-        }
+        this.products = new ArrayList<>(products.length);
+        Collections.addAll(this.products, products);
     }
 
     public String getName() {
@@ -40,22 +41,20 @@ public class Shop {
      */
     public void printProducts(){
         System.out.println("--Products--");
-
-        for(int i = 0; i < products.size(); i++) {
-            System.out.println("ID " + i + ": " + products.get(i).getName() + " - $" + String.format("%.2f",products.get(i).getPrice()));
+        for (Product product : products) {
+            System.out.println("ID " + product.getID() + ": " + product.getName() + " - $" + String.format("%.2f", product.getPrice()));
         }
-
     }
 
     /**
      * Basic search functionality for products.
      * @param searchText takes user input and looks for match.
-     * @return integer value of index for found product or -1 if not found.
+     * @return integer value of ID for found product or -1 if not found.
      */
     public int findProduct(String searchText){
-        for(int i = 0; i < products.size(); i++){
-            if((products.get(i).getName()).equals(searchText)){
-                return i;
+        for (Product product : products) {
+            if ((product.getName()).equals(searchText)) {
+                return product.getID();
             }
         }
         return -1;
