@@ -38,7 +38,7 @@ public class ShopRunner {
         //Product thing = new Product("Crew Neck" , 20.00);
         //products[0] = thing;
 
-        Shop shop = new Shop(products);
+        Shop shop = new Shop(name[0], products);
         Menu menu = new Menu(new Scanner(new InputStreamReader(System.in, Charset.forName("UTF-8"))) , shop);
 
         menu.greet();

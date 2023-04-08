@@ -1,5 +1,7 @@
 package main.java.com.ata;
 
+import java.util.ArrayList;
+
 /**
  * Shop class is responsible for storing the full inventory of products.
  * The class also holds a method that prints a formatted list of products
@@ -9,10 +11,10 @@ package main.java.com.ata;
  */
 public class Shop {
 
-    private Product[] products;
+    private String name;
+    private ArrayList<Product> products;
 
     public Shop(){
-
     }
 
     /**
@@ -21,8 +23,15 @@ public class Shop {
      * to be stored in products array.
      * @param products contains data on inventory.
      */
-    public Shop(Product[] products) {
-        this.products = products;
+    public Shop(String name, Product[] products) {
+        this.name = name;
+        for(int i = 0; i < products.length; i++){
+            this.products.add(products[i]);
+        }
+    }
+
+    public String getName() {
+        return name;
     }
 
     /**
@@ -32,8 +41,8 @@ public class Shop {
     public void printProducts(){
         System.out.println("--Products--");
 
-        for(int i = 0; i < products.length; i++) {
-            System.out.println("ID " + i + ": " + products[i].getName() + " - $" + String.format("%.2f",products[i].getPrice()));
+        for(int i = 0; i < products.size(); i++) {
+            System.out.println("ID " + i + ": " + products.get(i).getName() + " - $" + String.format("%.2f",products.get(i).getPrice()));
         }
 
     }
@@ -44,8 +53,8 @@ public class Shop {
      * @return integer value of index for found product or -1 if not found.
      */
     public int findProduct(String searchText){
-        for(int i = 0; i < products.length; i++){
-            if((products[i].getName()).equals(searchText)){
+        for(int i = 0; i < products.size(); i++){
+            if((products.get(i).getName()).equals(searchText)){
                 return i;
             }
         }
