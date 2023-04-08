@@ -11,6 +11,7 @@ import java.util.Scanner;
  * with respect to its menu.
  */
 public class Menu {
+    private Cart cart;
     private Shop shop;
     private String[] menuOptions = {"Exit" , "List Products" , "Buy Product" ,
             "Find Product" , "Show Cart" , "Checkout"};
@@ -35,16 +36,25 @@ public class Menu {
      */
     public void executeMenu() {
         printMenu();
-
         int selection = getNextIntFromUser();
-
         while(selection != 0){
-
             if(selection > 5 || selection < 0){
                 System.out.println("Invalid Input.");
-            } else if(selection == 1) {
+            }
+            else if(selection == 1) {
                 shop.printProducts();
-            } else if (selection == 3){
+            }
+            else if(selection == 2){
+                System.out.println("Please enter the ID of the product you would like to purchase:");
+                Product product = shop.findProductByID(getNextIntFromUser());
+                if(product == null){
+                    System.out.println("That item ID is invalid and could not be added to the cart.");
+                }
+                else {
+                    cart.addItem(product);
+                }
+            }
+            else if(selection == 3){
                 System.out.println("Enter the item to search for:");
                 String itemToFind = getNextStringLineFromUser();
                 int result = shop.findProduct(itemToFind);
@@ -53,14 +63,16 @@ public class Menu {
                 } else {
                     System.out.println(itemToFind + " was found and its product id is " + result);
                 }
-            } else {
+            }
+            else if(selection == 4){
+
+            }
+            else {
                 System.out.println("Option " + selection + " was selected. Not yet implemented.");
             }
             printMenu();
             selection = getNextIntFromUser();
-
         }
-
         System.out.println("Exiting now. Goodbye.");
         exit();
     }
@@ -70,10 +82,8 @@ public class Menu {
      * After the user provides their name, it outputs a greeting to the user to standard out.
      */
     public void greet() {
-
         System.out.println("Hello. Please enter your name:");
         String name = scanner.nextLine();
-
         System.out.println("Welcome " + name + " to " + shop.getName());
     }
 
@@ -85,7 +95,6 @@ public class Menu {
         System.out.println("--Main Menu--");
         System.out.println("Select an option using one of the numbers shown");
         System.out.println();
-
         for (int i = 0; i < menuOptions.length; i++) {
             System.out.print(i + ": ");
             System.out.println(menuOptions[i]);

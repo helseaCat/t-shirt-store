@@ -58,5 +58,14 @@ public class Shop {
         }
         return -1;
     }
+
+    public Product findProductByID(int id){
+        for(Product product : products) {
+            if (product.getID() == id) {
+                return product;
+            }
+        }
+        return null;
+    }
 }
 

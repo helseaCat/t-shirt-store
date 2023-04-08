@@ -9,6 +9,8 @@ class Cart {
 
     public void addItem(Product p){
         items.add(p);
+        total+=p.getPrice();
+        System.out.println(p.getName() + " has been added to your cart.");
     }
 
     public void showDetails(){
