@@ -13,8 +13,6 @@ import java.util.Scanner;
 public class Menu {
     private Cart cart = new Cart();
     private Shop shop;
-    private String[] menuOptions = {"Exit" , "List Products" , "Buy Product" ,
-            "Find Product" , "Show Cart" , "Checkout"};
     private Scanner scanner;
 
     /**
@@ -97,13 +95,9 @@ public class Menu {
      * Prints the menu header and menu options.
      */
     private void printMenu() {
-        System.out.println();
-        System.out.println("--Main Menu--");
-        System.out.println("Select an option using one of the numbers shown");
-        System.out.println();
-        for (int i = 0; i < menuOptions.length; i++) {
-            System.out.print(i + ": ");
-            System.out.println(menuOptions[i]);
+        System.out.println("\n--Main Menu--\nSelect an option using one of the numbers shown\n");
+        for (MenuOption options : MenuOption.values()) {
+            System.out.print(options.getId() + ": " + options.getDisplayValue());
         }
     }
 
