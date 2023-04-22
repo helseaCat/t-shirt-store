@@ -1,5 +1,6 @@
 package com.ata;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -34,11 +35,10 @@ public class Menu {
      */
     public void executeMenu() {
         printMenu();
-        MenuOption option = null;
+        MenuOption option = MenuOption.EXIT;
         option = option.fromOptionId(getNextIntFromUser());
         while(option != MenuOption.EXIT){
-            handleShopperMenuOptionSelection(option);
-            option = option.fromOptionId(getNextIntFromUser());
+            option = handleShopperMenuOptionSelection(option);
         }
         System.out.println("Exiting now. Goodbye.");
         exit();
@@ -54,81 +54,85 @@ public class Menu {
         System.out.println("Welcome " + name + " to " + shop.getName());
     }
 
-
-    private void handleShopperMenuOptionSelection(MenuOption option) {
-
+    private MenuOption handleShopperMenuOptionSelection(MenuOption option) {
         switch (option){
-            case EXIT:
-            case CHECKOUT:
-            case SHOW_CART:
-            case BUY_PRODUCT:
-            case FIND_PRODUCT:
             case LIST_PRODUCTS:
+                shop.printProducts();
+                printMenu();
+                return option.fromOptionId(getNextIntFromUser());
+            case BUY_PRODUCT:
+                addToCart();
+                printMenu();
+                return option.fromOptionId(getNextIntFromUser());
+            case FIND_PRODUCT:
+                findProduct();
+                printMenu();
+                return option.fromOptionId(getNextIntFromUser());
+            case SHOW_CART:
+                cart.showDetails();
+                printMenu();
+                return option.fromOptionId(getNextIntFromUser());
+            case CHECKOUT:
+                cart.checkout();
+                printMenu();
+                return option.fromOptionId(getNextIntFromUser());
             default:
                 System.out.println("Invalid Input.");
+                printMenu();
+                return option.fromOptionId(getNextIntFromUser());
         }
-
-//        if(option.equals(null)){
-//            System.out.println("Invalid Input.");
-//        }
-//        else if(option.equals(MenuOption.LIST_PRODUCTS)) {
-//            shop.printProducts();
-//        }
-//        else if(option.equals().MenuOption.() == 2){
-//        System.out.println("Please enter the ID of the product you would like to purchase:");
-//        Product product = shop.findProductByID(getNextIntFromUser());
-//        if(product == null){
-//            System.out.println("That item ID is invalid and could not be added to the cart.");
-//        }
-//        else {
-//            cart.addItem(product);
-//        }
-//    }
-//        else if(option.equals().MenuOption.() == 3){
-//        System.out.println("Enter the item to search for:");
-//        String itemToFind = getNextStringLineFromUser();
-//        int result = shop.findProduct(itemToFind);
-//        if(result == -1){
-//            System.out.println("That product was not found.");
-//        } else {
-//            System.out.println(itemToFind + " was found and its product id is " + result);
-//        }
-//    }
-//        else if(option.equals().MenuOption.() == 4){
-//        cart.showDetails();
-//    }
-//        else if(option.equals().MenuOption.() == 5){
-//        if(cart.checkout()){
-//            System.out.println("Thank you for shopping at " + shop.getName() + ".");
-//        }
-//        else {System.out.println("Your cart is currently empty. Please add at least one product to check out.");}
-//    }
-//        else {
-//        System.out.println("Option " + option.equals().MenuOption.() + " was selected. Not yet implemented.");
-//    }
-        printMenu();
-        option.equals().MenuOption.() = getNextIntFromUser();
     }
 
+    /**
+     * Skips a line of empty input from the scanner's input stream
+     * and then returns the next available line.
+     * @return string representing the line of input typed by the user
+     */
     private String getNextStringLineFromUser() {
         scanner.nextLine();
         return scanner.nextLine();
     }
-
-
 
     /**
      * Prints the menu header and menu options.
      */
     private void printMenu() {
         System.out.println("\n--Main Menu--\nSelect an option using one of the numbers shown\n");
+        int i = 0;
         for (MenuOption options : MenuOption.values()) {
-            System.out.print(options.MenuOption.() + ": " + options.getDisplayValue());
+            String[] ins = options.toString().split("_");
+            if(ins.length == 2){
+                String front = ins[0].substring(0, 1) + ins[0].substring(1).toLowerCase();
+                String back = ins[1].substring(0, 1) + ins[1].substring(1).toLowerCase();
+                System.out.printf("%d: %s %s%n", i, front, back);
+            }
+            else {
+                System.out.printf("%d: %s%n", i, ins[0].substring(0, 1) + ins[0].substring(1).toLowerCase());
+            }
+            i++;
         }
     }
 
     private void findProduct(){
+        System.out.println("Enter the item to search for:");
+        String itemToFind = getNextStringLineFromUser();
+        int result = shop.findProduct(itemToFind);
+        if(result == -1){
+            System.out.println("That product was not found.");
+        } else {
+            System.out.println(itemToFind + " was found and its product id is " + result);
+        }
+    }
 
+    private void addToCart(){
+        System.out.println("Please enter the ID of the product you would like to purchase:");
+        Product product = shop.findProductByID(getNextIntFromUser());
+        if(product == null){
+            System.out.println("That item ID is invalid and could not be added to the cart.");
+        }
+        else {
+            cart.addItem(product);
+        }
     }
 
     /**
@@ -143,12 +147,16 @@ public class Menu {
      * @return integer value denoting the user selection
      */
     private int getNextIntFromUser() {
-        return scanner.nextInt();
+        int ins = -1;
+        do{
+            try{
+                ins = scanner.nextInt();
+            }
+            catch(InputMismatchException e){
+                System.out.println("Invalid Input.");
+            }
+            scanner.nextLine();
+        }while (ins > 5 || ins < 0);
+        return ins;
     }
-
-    /**
-     * Skips a line of empty input from the scanner's input stream
-     * and then returns the next available line.
-     * @return string representing the line of input typed by the user
-     */
 }
