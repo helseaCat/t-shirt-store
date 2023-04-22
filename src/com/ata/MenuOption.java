@@ -1,12 +1,7 @@
 package com.ata;
 
 public enum MenuOption {
-    EXIT(1,"Exit"),
-    LIST_PRODUCTS(2,"List Products"),
-    BUY_PRODUCT(3, "Buy Product"),
-    FIND_PRODUCT(4, "Find Product"),
-    SHOW_CART(5, "Show Cart"),
-    CHECKOUT(6, "Checkout");
+    EXIT, LIST_PRODUCTS, BUY_PRODUCT, FIND_PRODUCT, SHOW_CART, CHECKOUT;
     private int id;
     private String displayValue;
 
@@ -18,7 +13,23 @@ public enum MenuOption {
         return displayValue;
     }
 
-    MenuOption(int id, String displayValue){
+    MenuOption fromOptionId(int optionId){
+        switch (optionId){
+            case 0:
+                return EXIT;
+            case 1:
+                return LIST_PRODUCTS;
+            case 2:
+                return BUY_PRODUCT;
+            case 3:
+                return FIND_PRODUCT;
+            case 4:
+                return SHOW_CART;
+            case 5:
+                return CHECKOUT;
+            default:
+                return null;
+        }
     }
 }
 
