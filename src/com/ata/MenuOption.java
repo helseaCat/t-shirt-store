@@ -13,7 +13,7 @@ public enum MenuOption {
         return displayValue;
     }
 
-    MenuOption fromOptionId(int optionId){
+    static MenuOption fromOptionId(int optionId){
         switch (optionId){
             case 0:
                 return EXIT;
