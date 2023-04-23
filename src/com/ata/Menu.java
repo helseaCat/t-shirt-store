@@ -1,6 +1,5 @@
 package com.ata;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -35,10 +34,9 @@ public class Menu {
      */
     public void executeMenu() {
         printMenu();
-        MenuOption option = MenuOption.EXIT;
-        option = option.fromOptionId(getNextIntFromUser());
+        MenuOption option = MenuOption.fromOptionId(getNextIntFromUser());
         while(option != MenuOption.EXIT){
-            option = handleShopperMenuOptionSelection(option);
+            handleShopperMenuOptionSelection(option);
         }
         System.out.println("Exiting now. Goodbye.");
         exit();
@@ -54,32 +52,38 @@ public class Menu {
         System.out.println("Welcome " + name + " to " + shop.getName());
     }
 
-    private MenuOption handleShopperMenuOptionSelection(MenuOption option) {
+    private void handleShopperMenuOptionSelection(MenuOption option) {
         switch (option){
             case LIST_PRODUCTS:
                 shop.printProducts();
                 printMenu();
-                return option.fromOptionId(getNextIntFromUser());
+                option.fromOptionId(getNextIntFromUser());
+                break;
             case BUY_PRODUCT:
                 addToCart();
                 printMenu();
-                return option.fromOptionId(getNextIntFromUser());
+                option.fromOptionId(getNextIntFromUser());
+                break;
             case FIND_PRODUCT:
                 findProduct();
                 printMenu();
-                return option.fromOptionId(getNextIntFromUser());
+                option.fromOptionId(getNextIntFromUser());
+                break;
             case SHOW_CART:
                 cart.showDetails();
                 printMenu();
-                return option.fromOptionId(getNextIntFromUser());
+                option.fromOptionId(getNextIntFromUser());
+                break;
             case CHECKOUT:
                 cart.checkout();
                 printMenu();
-                return option.fromOptionId(getNextIntFromUser());
+                option.fromOptionId(getNextIntFromUser());
+                break;
             default:
                 System.out.println("Invalid Input.");
                 printMenu();
-                return option.fromOptionId(getNextIntFromUser());
+                option.fromOptionId(getNextIntFromUser());
+                break;
         }
     }
 
@@ -147,16 +151,17 @@ public class Menu {
      * @return integer value denoting the user selection
      */
     private int getNextIntFromUser() {
-        int ins = -1;
-        do{
-            try{
-                ins = scanner.nextInt();
-            }
-            catch(InputMismatchException e){
-                System.out.println("Invalid Input.");
-            }
-            scanner.nextLine();
-        }while (ins > 5 || ins < 0);
-        return ins;
+        return scanner.nextInt();
+//        int ins = -1;
+//        do{
+//            try{
+//                ins = scanner.nextInt();
+//            }
+//            catch(InputMismatchException e){
+//                System.out.println("Invalid Input.");
+//            }
+//            scanner.nextLine();
+//        }while (ins > 5 || ins < 0);
+//        return ins;
     }
 }
