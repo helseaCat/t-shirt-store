@@ -1,4 +1,4 @@
-package com.ata;
+package click.nekocatgato;
 
 import java.util.Scanner;
 
@@ -34,8 +34,8 @@ public class Menu {
      */
     public void executeMenu() {
         printMenu();
-        MenuOption option = MenuOption.fromOptionId(getNextIntFromUser());
-        while(option != MenuOption.EXIT){
+        com.ata.MenuOption option = com.ata.MenuOption.fromOptionId(getNextIntFromUser());
+        while(option != com.ata.MenuOption.EXIT){
             handleShopperMenuOptionSelection(option);
         }
         System.out.println("Exiting now. Goodbye.");
@@ -52,7 +52,7 @@ public class Menu {
         System.out.println("Welcome " + name + " to " + shop.getName());
     }
 
-    private void handleShopperMenuOptionSelection(MenuOption option) {
+    private void handleShopperMenuOptionSelection(com.ata.MenuOption option) {
         switch (option){
             case LIST_PRODUCTS:
                 shop.printProducts();
@@ -103,7 +103,7 @@ public class Menu {
     private void printMenu() {
         System.out.println("\n--Main Menu--\nSelect an option using one of the numbers shown\n");
         int i = 0;
-        for (MenuOption options : MenuOption.values()) {
+        for (com.ata.MenuOption options : com.ata.MenuOption.values()) {
             String[] ins = options.toString().split("_");
             if(ins.length == 2){
                 String front = ins[0].substring(0, 1) + ins[0].substring(1).toLowerCase();

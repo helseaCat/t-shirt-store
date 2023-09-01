@@ -1,4 +1,4 @@
-package com.ata;
+package click.nekocatgato;
 
 import java.util.ArrayList;
 

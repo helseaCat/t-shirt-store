@@ -1,4 +1,4 @@
-package com.ata;
+package click.nekocatgato;
 
 /**
  * Shop class is responsible for storing the full inventory of products.
