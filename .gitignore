@@ -3,6 +3,7 @@
 
 .DS_Store
 ./out/
+*.iml
 
 # User-specific stuff
 .idea/**/workspace.xml
