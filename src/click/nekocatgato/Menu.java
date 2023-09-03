@@ -33,12 +33,17 @@ public class Menu {
      * All input is collected from standard in.
      */
     public void executeMenu() {
-        printMenu();
-        com.ata.MenuOption option = com.ata.MenuOption.fromOptionId(getNextIntFromUser());
-        while(option != com.ata.MenuOption.EXIT){
+        MenuOption option = null;
+
+//        printMenu();
+//        MenuOption option = MenuOption.fromOptionId(getNextIntFromUser());
+        while(option != MenuOption.EXIT){
+            printMenu();
+            option = option.fromOptionId(getNextIntFromUser());
+            System.out.print("\n\n-----------------------------\n\n");
             handleShopperMenuOptionSelection(option);
+            System.out.print("\n\n=============================\n\n");
         }
-        System.out.println("Exiting now. Goodbye.");
         exit();
     }
 
@@ -52,37 +57,33 @@ public class Menu {
         System.out.println("Welcome " + name + " to " + shop.getName());
     }
 
-    private void handleShopperMenuOptionSelection(com.ata.MenuOption option) {
+    private void handleShopperMenuOptionSelection(MenuOption option) {
         switch (option){
+            case EXIT:
+                System.out.print("Exiting now. Goodbye.");
+                break;
             case LIST_PRODUCTS:
+                System.out.println("List Products\n");
                 shop.printProducts();
-                printMenu();
-                option.fromOptionId(getNextIntFromUser());
                 break;
             case BUY_PRODUCT:
+                System.out.println("Buy Product\n");
                 addToCart();
-                printMenu();
-                option.fromOptionId(getNextIntFromUser());
                 break;
             case FIND_PRODUCT:
+                System.out.println("Find Product\n");
                 findProduct();
-                printMenu();
-                option.fromOptionId(getNextIntFromUser());
                 break;
             case SHOW_CART:
+                System.out.println("Show Cart\n");
                 cart.showDetails();
-                printMenu();
-                option.fromOptionId(getNextIntFromUser());
                 break;
             case CHECKOUT:
+                System.out.println("Checkout\n");
                 cart.checkout();
-                printMenu();
-                option.fromOptionId(getNextIntFromUser());
                 break;
             default:
-                System.out.println("Invalid Input.");
-                printMenu();
-                option.fromOptionId(getNextIntFromUser());
+                System.out.println("Invalid Input.\n");
                 break;
         }
     }
@@ -103,7 +104,7 @@ public class Menu {
     private void printMenu() {
         System.out.println("\n--Main Menu--\nSelect an option using one of the numbers shown\n");
         int i = 0;
-        for (com.ata.MenuOption options : com.ata.MenuOption.values()) {
+        for (MenuOption options : MenuOption.values()) {
             String[] ins = options.toString().split("_");
             if(ins.length == 2){
                 String front = ins[0].substring(0, 1) + ins[0].substring(1).toLowerCase();

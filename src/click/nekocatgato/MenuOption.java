@@ -1,4 +1,4 @@
-package com.ata;
+package click.nekocatgato;
 
 public enum MenuOption {
     EXIT, LIST_PRODUCTS, BUY_PRODUCT, FIND_PRODUCT, SHOW_CART, CHECKOUT;
@@ -13,6 +13,11 @@ public enum MenuOption {
         return displayValue;
     }
 
+    /**
+     * Takes an integer and returns the enum equivalent.
+     * @param optionId
+     * @return MenuOption
+     */
     static MenuOption fromOptionId(int optionId){
         switch (optionId){
             case 0:
